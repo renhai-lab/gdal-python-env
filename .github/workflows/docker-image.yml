@@ -34,5 +34,5 @@ jobs:
           BUILD_IMAGE_NAME=${BUILD_IMAGE_NAMES[$i]}
           PUBLISH_IMAGE_NAME=${PUBLISH_IMAGE_NAMES[$i]}
           PLATFORM=${PLATFORMS_LIST[$i]}
-          docker buildx build --platform $PLATFORM -t $PUBLISH_IMAGE_NAME --build-arg IMAGE_NAME=$BUILD_IMAGE_NAME --file Dockerfile --push .
+          docker buildx build --platform $PLATFORM -t $PUBLISH_IMAGE_NAME --build-arg BUILD_IMAGE_NAME=$BUILD_IMAGE_NAME --file Dockerfile --push .
         done
