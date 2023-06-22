@@ -3,11 +3,20 @@ ARG BUILD_IMAGE_NAME
 
 FROM ${BUILD_IMAGE_NAME} as build
 
+
+# 设置非交互式环境变量
+ENV DEBIAN_FRONTEND=noninteractive
+
+# 设置时区
+RUN ln -fs /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
+    dpkg-reconfigure -f noninteractive tzdata
+
+
 RUN apt-get --allow-releaseinfo-change update \
-    && apt-get install -y tzdata chromium-driver git python3-pip --fix-missing\
-    && ln -fs /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
-    && dpkg-reconfigure --frontend noninteractive tzdata \
-    && rm -rf /var/lib/apt/lists/*
+    && apt-get install -y chromium-driver git python3-pip --fix-missing\
+    && rm -rf /var/lib/apt/lists/* \
+    && apt-get clean \
+
 # Set the working directory in the container
 WORKDIR /app
 
