@@ -1,0 +1,18 @@
+# 构建容器示例
+version: "3"
+
+services:
+  python:
+    image: renhai/gdal-python-env-small:latest # or renhai/gdal-python-env-full:latest
+#    build:
+#      context: .
+#      dockerfile: Dockerfile
+    container_name: container_name
+    network_mode: "bridge"
+    environment:
+      - SET_CONTAINER_TIMEZONE=true
+      - CONTAINER_TIMEZONE=Asia/Shanghai
+    volumes:
+      - "./:/app/"
+    restart: on-failure
+    command: python3 run.py

@@ -1,0 +1,38 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v1
+      
+    - name: Log into registry
+      run: echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
+      
+    - name: Set Docker Build and Publish Args
+      env:
+        PUBLISH_IMAGE_NAME_LIST: renhai/${{ github.repository }}-full:latest,renhai/${{ github.repository }}-small:latest
+        PLATFORMS: linux/amd64,linux/arm64
+        BUILD_IMAGE_NAME: ubuntu-full-latest:latest,ubuntu-small-latest:latest
+      run: |
+        IFS=',' read -ra BUILD_IMAGE_NAMES <<< "$BUILD_IMAGE_NAME"
+        IFS=',' read -ra PUBLISH_IMAGE_NAMES <<< "$PUBLISH_IMAGE_NAME_LIST"
+        IFS=',' read -ra PLATFORMS_LIST <<< "$PLATFORMS"
+        for i in "${!BUILD_IMAGE_NAMES[@]}"; do
+          BUILD_IMAGE_NAME=${BUILD_IMAGE_NAMES[$i]}
+          PUBLISH_IMAGE_NAME=${PUBLISH_IMAGE_NAMES[$i]}
+          PLATFORM=${PLATFORMS_LIST[$i]}
+          docker buildx build --platform $PLATFORM -t $PUBLISH_IMAGE_NAME --build-arg IMAGE_NAME=$BUILD_IMAGE_NAME --file Dockerfile --push .l
+        done
