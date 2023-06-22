@@ -8,12 +8,10 @@ FROM ${BUILD_IMAGE_NAME} as build
 ENV DEBIAN_FRONTEND=noninteractive
 
 # 设置时区
-RUN ln -fs /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
-    dpkg-reconfigure -f noninteractive tzdata
-
-
 RUN apt-get --allow-releaseinfo-change update \
-    && apt-get install -y chromium-driver git python3-pip --fix-missing\
+    && apt-get install -y tzdata chromium-driver git python3-pip --fix-missing\
+    && ln -fs /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
+    && dpkg-reconfigure -f noninteractive tzdata \
     && rm -rf /var/lib/apt/lists/* \
     && apt-get clean \
 
