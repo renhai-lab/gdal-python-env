@@ -23,7 +23,7 @@ jobs:
       
     - name: Set Docker Build and Publish Args
       env:
-        PUBLISH_IMAGE_NAME_LIST: renhai/gdal-python-env-full:latest,renhai/$gdal-python-env-small:latest
+        PUBLISH_IMAGE_NAME_LIST: renhai/gdal-python-env-full:latest,renhai/gdal-python-env-small:latest
         PLATFORMS: linux/amd64,linux/arm64
         BUILD_IMAGE_NAME: osgeo/gdal:ubuntu-full-latest,osgeo/gdal:ubuntu-small-latest
       run: |
