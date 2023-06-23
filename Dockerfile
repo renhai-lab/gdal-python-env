@@ -11,7 +11,17 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 # 设置时区
 RUN apt-get --allow-releaseinfo-change update \
-    && apt-get install -y tzdata git python3-pip wget curl --fix-missing \
+    && apt-get install -y --fix-missing \
+    tzdata \
+    git \
+    python3-pip \
+    wget curl \
+    xserver-xorg-core x11-xkb-utils xvfb  \
+    xfonts-100dpi xfonts-75dpi xfonts-scalable xfonts-cyrillic \
+    build-essential chrpath libssl-dev libxft-dev \
+    libfreetype6 libfreetype6-dev \
+    libfontconfig1 libfontconfig1-dev \
+    libmysqlclient-dev \
     && ln -fs /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
     && dpkg-reconfigure -f noninteractive tzdata \
     && rm -rf /var/lib/apt/lists/* \
