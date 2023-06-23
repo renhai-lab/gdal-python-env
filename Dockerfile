@@ -11,7 +11,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 # 设置时区
 RUN apt-get --allow-releaseinfo-change update \
-    && apt-get install -y tzdata git python3-pip wget curl --fix-missing\
+    && apt-get install -y tzdata git python3-pip wget curl --fix-missing \
     && ln -fs /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
     && dpkg-reconfigure -f noninteractive tzdata \
     && rm -rf /var/lib/apt/lists/* \
@@ -20,21 +20,21 @@ RUN apt-get --allow-releaseinfo-change update \
 
 # Install Chrome
 RUN cd /tmp \
-    && sudo wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb \
-    && sudo apt-get -f install -y --force-yes \
-    && sudo dpkg -i google-chrome-stable_current_amd64.deb
+    && wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb \
+    && apt-get -f install -y --force-yes \
+    && dpkg -i google-chrome-stable_current_amd64.deb
 
 # Install Chromedriver
 RUN CHROMEDRIVER_VERSION=`curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE` \
-    && sudo wget -N http://chromedriver.storage.googleapis.com/$CHROMEDRIVER_VERSION/chromedriver_linux64.zip -P ~/Downloads \
-    && sudo unzip -o ~/Downloads/chromedriver_linux64.zip -d ~/Downloads \
-    && sudo chmod +x ~/Downloads/chromedriver \
-    && sudo rm -f /usr/local/share/chromedriver \
-    && sudo rm -f /usr/local/bin/chromedriver \
-    && sudo rm -f /usr/bin/chromedriver \
-    && sudo mv -f ~/Downloads/chromedriver /usr/local/share/chromedriver \
-    && sudo ln -s /usr/local/share/chromedriver /usr/local/bin/chromedriver \
-    && sudo ln -s /usr/local/share/chromedriver /usr/bin/chromedriver
+    && wget -N http://chromedriver.storage.googleapis.com/$CHROMEDRIVER_VERSION/chromedriver_linux64.zip -P ~/Downloads \
+    && unzip -o ~/Downloads/chromedriver_linux64.zip -d ~/Downloads \
+    && chmod +x ~/Downloads/chromedriver \
+    && rm -f /usr/local/share/chromedriver \
+    && rm -f /usr/local/bin/chromedriver \
+    && rm -f /usr/bin/chromedriver \
+    && mv -f ~/Downloads/chromedriver /usr/local/share/chromedriver \
+    && ln -s /usr/local/share/chromedriver /usr/local/bin/chromedriver \
+    && ln -s /usr/local/share/chromedriver /usr/bin/chromedriver
     
 
 RUN cd /tmp \
