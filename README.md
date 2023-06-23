@@ -1,14 +1,16 @@
 # gdal-python-env
-从[官方gdal镜像](https://hub.docker.com/r/osgeo/gdal/tags)构建gdal的自用python3.10环境，安装的python包见requirements.txt。
+从[官方gdal镜像](https://hub.docker.com/r/osgeo/gdal/tags)和[官方github](https://github.com/OSGeo/gdal/pkgs/container/gdal/versions?filters%5Bversion_type%5D=tagged)构建gdal的自用python3.10环境，安装的python包见requirements.txt。
 
 ## 用法：
 
 ### 1 拉取 pull
 
 ```bash
-docker pull renhai/python-env:ubuntu-full-latest # 完整版，约1.1G
+docker pull renhai/python-env:ubuntu-full-latest # 完整版，约1.5G
 # 或者
 docker pull renhai/python-env:ubuntu-small-latest # 精简版，约0.3G
+# 或者
+docker pull renhai/ghcr.io/osgeo/gdal:alpine-normal-latest # 比较新
 ```
 
 ### 2 使用 
@@ -22,7 +24,7 @@ version: "3"
 
 services:
   python:
-    image: renhai/gdal-python-env-small:latest # or renhai/gdal-python-env-full:latest
+    image: renhai/gdal-python-env-small:latest 
     container_name: container_name
     network_mode: "bridge"
     environment:
