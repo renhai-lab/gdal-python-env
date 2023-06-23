@@ -8,7 +8,7 @@ pypushdeer
 lxml
 beautifulsoup4
 scrapy
-scrapy_ajax_utils@git+https://github.com/kingronjan/scrapy_ajax_utils.git
+scrapy_ajax_utils@git+https://github.com/renhaiidea/scrapy_ajax_utils_fix.git
 pandas
 numpy
 ChangeCoordinate@git+https://github.com/GaryLea/ChangeCoordinate.git
