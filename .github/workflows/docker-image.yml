@@ -23,9 +23,9 @@ jobs:
       
     - name: Set Docker Build and Publish Args
       env:
-        PUBLISH_IMAGE_NAME_LIST: renhai/python-env:ubuntu-full-latest,renhai/python-env:ubuntu-small-latest
+        PUBLISH_IMAGE_NAME_LIST: renhai/python-env:ubuntu-full-latest,renhai/python-env:ubuntu-small-latest,renhai/python-env:alpine-normal-latest
         PLATFORMS: linux/amd64,linux/arm64
-        BUILD_IMAGE_NAME: osgeo/gdal:ubuntu-full-latest,osgeo/gdal:ubuntu-small-latest
+        BUILD_IMAGE_NAME: osgeo/gdal:ubuntu-full-latest,osgeo/gdal:ubuntu-small-latest,ghcr.io/osgeo/gdal:alpine-normal-latest
       run: |
         IFS=',' read -ra BUILD_IMAGE_NAMES <<< "$BUILD_IMAGE_NAME"
         IFS=',' read -ra PUBLISH_IMAGE_NAMES <<< "$PUBLISH_IMAGE_NAME_LIST"
