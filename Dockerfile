@@ -3,6 +3,8 @@ ARG BUILD_IMAGE_NAME
 
 FROM ${BUILD_IMAGE_NAME} as build
 
+# Set the working directory in the container
+WORKDIR /app
 
 # 设置非交互式环境变量
 ENV DEBIAN_FRONTEND=noninteractive
@@ -14,9 +16,6 @@ RUN apt-get --allow-releaseinfo-change update \
     && dpkg-reconfigure -f noninteractive tzdata \
     && rm -rf /var/lib/apt/lists/* \
     && apt-get clean \
-
-# Set the working directory in the container
-WORKDIR /app
 
 # Copy the requirements.txt file to the container
 COPY ./requirements.txt /tmp/requirements.txt
@@ -35,5 +34,5 @@ RUN cd /tmp \
 ENV TZ=Asia/Shanghai
 ENV LANG C.UTF-8
 
-CMD ["python"]
+# CMD ["python"]
 
