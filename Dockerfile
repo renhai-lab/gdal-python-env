@@ -14,7 +14,6 @@ RUN apt-get --allow-releaseinfo-change update \
     && apt-get install -y \
     tzdata \
     git \
-    python3-pip \
     wget curl \
     chromium-driver \
     && ln -fs /usr/share/zoneinfo/Asia/Shanghai /etc/localtime\
