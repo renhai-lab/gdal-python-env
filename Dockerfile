@@ -15,6 +15,7 @@ RUN apt-get --allow-releaseinfo-change update \
     tzdata \
     git \
     wget curl \
+    python3-pip \
     chromium-driver \
     && ln -fs /usr/share/zoneinfo/Asia/Shanghai /etc/localtime\
     && dpkg-reconfigure -f noninteractive tzdata \
