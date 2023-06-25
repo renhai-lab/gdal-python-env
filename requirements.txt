@@ -13,6 +13,9 @@ numpy
 ChangeCoordinate@git+https://github.com/GaryLea/ChangeCoordinate.git
 langchain
 openai
+unstructured
+chromadb
+tiktoken
 geopandas~=0.13.0
 shapely
 rasterio
